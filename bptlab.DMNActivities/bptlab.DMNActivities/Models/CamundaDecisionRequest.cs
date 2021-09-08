@@ -41,7 +41,17 @@ namespace bptlab.DMNActivities.Models
         {
             value = varValue;
             string typeIdentifier = value.GetType().ToString();
-            type = typeIdentifier.Replace("System.", "");
+            typeIdentifier = typeIdentifier.Replace("System.", "");
+            switch (typeIdentifier)
+            {
+                case "Int32":
+                    type = "Number";
+                    break;
+                default:
+                    type = typeIdentifier;
+                    break;
+            }
+            
         }
         public dynamic value { get; set; }
         public string type{ get; set; }

@@ -30,7 +30,7 @@ namespace bptlab.DMNActivities.Activities
         [LocalizedDisplayName(nameof(Resources.ExternalDecisionService_InputVariables_DisplayName))]
         [LocalizedDescription(nameof(Resources.ExternalDecisionService_InputVariables_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<String[]> InputVariables { get; set; }
+        public InArgument<dynamic[]> InputVariables { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.ExternalDecisionService_InputVariablesNames_DisplayName))]
         [LocalizedDescription(nameof(Resources.ExternalDecisionService_InputVariablesNames_Description))]
@@ -87,7 +87,8 @@ namespace bptlab.DMNActivities.Activities
             var decisionRequest = new CamundaDecisionRequest(inputVariablesNames, inputVariables);
 
             var httpClient = new HttpClient();
-            var data = new StringContent(decisionRequest.ToJson(), Encoding.UTF8, "application/json");
+            var jsonDecisionRequest = decisionRequest.ToJson();
+            var data = new StringContent(jsonDecisionRequest, Encoding.UTF8, "application/json");
             var url = serviceHost + "/engine-rest/decision-definition/key/" + decisionKey + "/evaluate";
 
             var response = await httpClient.PostAsync(url, data);

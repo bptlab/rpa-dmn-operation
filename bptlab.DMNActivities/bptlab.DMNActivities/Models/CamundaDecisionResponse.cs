@@ -17,10 +17,10 @@ namespace bptlab.DMNActivities.Models
         public Dictionary<String, Object> getResult()
         {
             var resultDictionary = new Dictionary<String, Object> { };
-            foreach (var resultVariable in result)
+            foreach (var resultVariable in result[0])
             {
-                var variableName = resultVariable.Keys.First();
-                var variableValue = resultVariable.Values.First().value;
+                var variableName = resultVariable.Key;
+                var variableValue = resultVariable.Value.value;
                 resultDictionary.Add(variableName, variableValue);
             }
             return resultDictionary;
@@ -32,7 +32,7 @@ namespace bptlab.DMNActivities.Models
     public class CamundaResponseVariableContent
 {
         public string type { get; set; }
-        public string value { get; set; }
+        public dynamic value { get; set; }
         public object valueInfo { get; set; }
     }
 
