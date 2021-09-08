@@ -11,14 +11,29 @@ namespace bptlab.DMNActivities.Models
     {
         public CamundaDecisionResponse(String jsonObject)
         {
-            result = JsonSerializer.Deserialize<Dictionary<string, Dictionary<String, String>>[]>(jsonObject);
+            result = JsonSerializer.Deserialize<Dictionary<string,CamundaResponseVariableContent>[]>(jsonObject);
         }
 
-        public string getResult()
+        public Dictionary<String, Object> getResult()
         {
-            return result[0]["result"]["value"];
+            var resultDictionary = new Dictionary<String, Object> { };
+            foreach (var resultVariable in result)
+            {
+                var variableName = resultVariable.Keys.First();
+                var variableValue = resultVariable.Values.First().value;
+                resultDictionary.Add(variableName, variableValue);
+            }
+            return resultDictionary;
         }
 
-        private Dictionary<string, Dictionary<String, String>>[] result { get; }
+        private Dictionary<string, CamundaResponseVariableContent>[] result { get; set; }
     }
+
+    public class CamundaResponseVariableContent
+{
+        public string type { get; set; }
+        public string value { get; set; }
+        public object valueInfo { get; set; }
+    }
+
 }

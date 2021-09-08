@@ -50,7 +50,7 @@ namespace bptlab.DMNActivities.Activities
         [LocalizedDisplayName(nameof(Resources.ExternalDecisionService_DecisionResult_DisplayName))]
         [LocalizedDescription(nameof(Resources.ExternalDecisionService_DecisionResult_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<string> DecisionResult { get; set; }
+        public OutArgument<Dictionary<String, Object>> DecisionResult { get; set; }
 
         #endregion
 
