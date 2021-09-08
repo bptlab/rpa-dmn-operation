@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or want to cite it in your paper, please cite it as below."
+
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Völker"
+    given-names: "Maximilian"
+  - family-names: "Siegert"
+    given-names: "Simon"
+  - family-names: "Weske"
+    given-names: "Mathias"
+  doi: 10.1007/978-3-030-85867-4_3
+  conference:
+    name: "BPM 2021: Business Process Management: Blockchain and Robotic Process Automation Forum"
+  publisher:
+    name: "Springer, Cham"
+  month: 8
+  start: 23 # First page number
+  end: 37 # Last page number
+  title: "Adding Decision Management to Robotic Process Automation"
+  year: 2021
