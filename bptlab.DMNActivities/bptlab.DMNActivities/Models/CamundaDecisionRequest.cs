@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Linq;
@@ -9,12 +9,13 @@ namespace bptlab.DMNActivities.Models
 {
     public class CamundaDecisionRequest
     {
-        public CamundaDecisionRequest() {
-            variables = new Dictionary<String, Dictionary<String, String>> ();
-        }
-        public CamundaDecisionRequest(String[] names, String[] values)
+        public CamundaDecisionRequest()
         {
-            variables = new Dictionary<String, Dictionary<String, String>>();
+            variables = new Dictionary<String, CamundaDecisionRequestVariable>();
+        }
+        public CamundaDecisionRequest(String[] names, dynamic[] values)
+        {
+            variables = new Dictionary<String, CamundaDecisionRequestVariable>();
 
             if (names.Length != values.Length)
             {
@@ -22,25 +23,27 @@ namespace bptlab.DMNActivities.Models
             }
             for (int i = 0; i < names.Length; i++)
             {
-                addVariable(names[i], values[i]);
+                variables[names[i]] = new CamundaDecisionRequestVariable(values[i]);
             }
-        }
-
-        public void addVariable(string name, string value)
-        {
-            variables[name] = new Dictionary<string, string> { ["value"] = value };
-            return;
         }
 
         public String ToJson()
         {
-            var requestBody = new Dictionary<string, Dictionary<string, Dictionary<String, String>>>
-            {
-                ["variables"] = variables
-            };
-            return JsonSerializer.Serialize(requestBody);
+            return JsonSerializer.Serialize(this);
         }
 
-        private Dictionary<String, Dictionary<String, String>> variables { get; }
+        public Dictionary<String, CamundaDecisionRequestVariable> variables { get; }
+    }
+
+    public class CamundaDecisionRequestVariable
+    {
+        public CamundaDecisionRequestVariable(dynamic varValue)
+        {
+            value = varValue;
+            string typeIdentifier = value.GetType().ToString();
+            type = typeIdentifier.Replace("System.", "");
+        }
+        public dynamic value { get; set; }
+        public string type{ get; set; }
     }
 }
