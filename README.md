@@ -35,8 +35,6 @@ After adding a DMN acivity to your workflow, the following elements need to be c
 > The decision key looks something like `"Decision_1hyvppg"` and the service host, if the engine is deployed locally, might be `"http://localhost:8080"`.
 
 
+> :information_source: Please bear in mind that this activity is currently in the prototype stage.
 
-## Limitations
-Please bear in mind that this activity is currently in the prototype stage.
-One major current limitation is, that only string values can be handled. If you want to user other data types, you currently would need to convert them in your robot workflow.
 
